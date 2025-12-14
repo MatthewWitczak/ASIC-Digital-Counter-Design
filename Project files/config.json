@@ -1,8 +1,0 @@
-{
-  "DESIGN_NAME": "counter",
-  "VERILOG_FILES": ["dir::src/counter.v"],
-  "CLOCK_PORT": "clk",
-  "CLOCK_PERIOD": 20.0
-}
-
-
