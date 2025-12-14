@@ -1,12 +1,12 @@
 #################################
-# SYSTEM
+# SYSTEM FILES (macOS / Unix)
 #################################
 .DS_Store
 ._*
 *~
 
 #################################
-# EDYTORY / IDE
+# EDITORS / IDE SETTINGS
 #################################
 .vscode/
 .idea/
@@ -14,22 +14,22 @@
 *.swo
 
 #################################
-# SYMULACJA (GENEROWANE)
+# SIMULATION – GENERATED FILES
 #################################
-# binarki symulatorów
+# Simulator binaries and outputs
 sim
 simv
 *.vvp
 
-# dumpy fal
+# Waveform dumps
 *.vcd
 *.fst
 *.gtkw
 
 #################################
-# OPENLANE / ASIC FLOW
+# OPENLANE / ASIC FLOW – GENERATED
 #################################
-# CAŁY FLOW ignorujemy
+# Full OpenLane runs (reproducible, not versioned)
 runs/
 logs/
 reports/
@@ -38,7 +38,28 @@ work/
 openlane/*/runs/
 
 #################################
-# STA / POŚREDNIE
+# LAYOUT / PHYSICAL DESIGN
+#################################
+# Ignore layout files generated anywhere by default
+*.gds
+*.gds2
+*.def
+*.lef
+*.mag
+*.spice
+*.spi
+
+# BUT keep final, curated layout artifacts
+# stored explicitly in the layout/ directory
+!layout/
+!layout/**
+!layout/*.gds
+!layout/*.gds2
+!layout/*.def
+!layout/*.lef
+
+#################################
+# TIMING / INTERMEDIATE NETLISTS
 #################################
 *.sdf
 *.spef
@@ -47,28 +68,10 @@ openlane/*/runs/
 *.json
 *.blif
 *.edif
-*.spice
-*.spi
 
 #################################
-# LAYOUT – UWAGA
-#################################
-# NIE ignorujemy:
-# *.gds
-# *.lef
-# *.def
-
-#################################
-# CACHE / TEMP
+# TEMPORARY / LOG FILES
 #################################
 *.log
 *.bak
 *.tmp
-
-#################################
-# PYTHON (jeśli jest)
-#################################
-__pycache__/
-.env
-.venv/
-
