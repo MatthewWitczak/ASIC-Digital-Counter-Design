@@ -14,62 +14,6 @@
 *.swo
 
 #################################
-# SIMULATION – GENERATED FILES
-#################################
-# Simulator binaries and outputs
-sim
-simv
-*.vvp
-
-# Waveform dumps
-*.vcd
-*.fst
-*.gtkw
-
-#################################
-# OPENLANE / ASIC FLOW – GENERATED
-#################################
-# Full OpenLane runs (reproducible, not versioned)
-runs/
-logs/
-reports/
-tmp/
-work/
-openlane/*/runs/
-
-#################################
-# LAYOUT / PHYSICAL DESIGN
-#################################
-# Ignore layout files generated anywhere by default
-*.gds
-*.gds2
-*.def
-*.lef
-*.mag
-*.spice
-*.spi
-
-# BUT keep final, curated layout artifacts
-# stored explicitly in the layout/ directory
-!layout/
-!layout/**
-!layout/*.gds
-!layout/*.gds2
-!layout/*.def
-!layout/*.lef
-
-#################################
-# TIMING / INTERMEDIATE NETLISTS
-#################################
-*.sdf
-*.spef
-*.lib
-*.db
-*.json
-*.blif
-*.edif
-
-#################################
 # TEMPORARY / LOG FILES
 #################################
 *.log
