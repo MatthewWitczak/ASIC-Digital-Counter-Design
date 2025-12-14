@@ -1,0 +1,27 @@
+101. Printing statistics.
+
+=== counter ===
+
+   Number of wires:                 26
+   Number of wire bits:             33
+   Number of public wires:           3
+   Number of public wire bits:      10
+   Number of ports:                  3
+   Number of port bits:             10
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 31
+     sky130_fd_sc_hd__a21oi_2        2
+     sky130_fd_sc_hd__and3_2         4
+     sky130_fd_sc_hd__dfrtp_2        8
+     sky130_fd_sc_hd__inv_2          9
+     sky130_fd_sc_hd__nand2_2        1
+     sky130_fd_sc_hd__nor2_2         2
+     sky130_fd_sc_hd__o2bb2a_2       1
+     sky130_fd_sc_hd__xnor2_2        1
+     sky130_fd_sc_hd__xor2_2         3
+
+   Chip area for module '\counter': 386.620800
+     of which used for sequential elements: 210.201600 (54.37%)
+
