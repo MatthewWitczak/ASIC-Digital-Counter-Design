@@ -2,7 +2,7 @@ module counter #(
     parameter WIDTH = 8
 )(
     input  wire             clk,
-    input  wire             rst,
+    input  wire             rst,     // reset aktywny '1'
     output reg  [WIDTH-1:0] q
 );
 
