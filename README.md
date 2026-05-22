@@ -30,19 +30,22 @@ In ASIC implementations, the RTL description is mapped onto a predefined standar
 
 # Design Architecture
 
-The counter is implemented as a fully synchronous sequential circuit composed of a register bank and combinational next-state logic. All state elements are edge-triggered flip-flops driven by a single global clock, eliminating asynchronous behavior and simplifying timing closure.
+The counter is implemented as a clocked sequential circuit composed of a register bank and combinational next-state logic. The counter state is updated on the rising edge of the clock, while an active-high asynchronous reset is used to force the register bank into a known initial state independently of the clock.
 
-The register bank stores the current counter value, while the combinational logic computes the next value by incrementing the current state by one. The counter width is defined as a parameter, allowing the same architecture to be synthesized for different bit widths without modifying the RTL structure. An active-high asynchronous reset forces the counter into a known initial state independently of the clock, ensuring deterministic initialization before normal clocked operation begins.
+The register bank stores the current counter value, while the combinational logic computes the next value by incrementing the current state by one. The counter width is defined as a parameter, allowing the same architecture to be synthesized for different bit widths without modifying the RTL structure. After reset deassertion, the counter resumes normal synchronous operation and increments on each rising clock edge.
 
 The architecture is intentionally kept regular and shallow in logic depth to ensure predictable timing behavior and efficient mapping onto standard cells during synthesis and place-and-route.
 
 # RTL Implementation
 
-The design is described in synthesizable Verilog as a parameterizable module with a configurable bit width (`WIDTH`). The module interface consists of a clock input (`clk`), a synchronous active-high reset (`rst`), and an output vector (`count[WIDTH-1:0]`) representing the current counter state.
+The design is described in synthesizable Verilog as a parameterizable module with a configurable bit width (`WIDTH`). The module interface consists of a clock input (`clk`), an active-high asynchronous reset (`rst`), and an output vector (`q[WIDTH-1:0]`) representing the current counter state.
 
-The sequential behavior is implemented using a single clocked `always` block sensitive to the rising edge of the clock. When the reset signal is asserted, the counter is synchronously cleared to zero. When reset is deasserted, the counter increments by one on each clock edge. Due to the fixed output width, arithmetic overflow results in a natural wrap-around from `2^WIDTH − 1` back to zero, implementing modulo-`2^WIDTH` behavior without additional control logic.
+The sequential behavior is implemented using a single `always` block sensitive to the rising edge of the clock and the rising edge of the reset signal. When reset is asserted, the counter is immediately cleared to zero. When reset is deasserted, the counter increments by one on each rising clock edge.
+
+Due to the fixed output width, arithmetic overflow results in a natural wrap-around from `2^WIDTH − 1` back to zero, implementing modulo-`2^WIDTH` behavior without additional control logic.
 
 The RTL is written to be fully synthesis-compatible and free of constructs that could lead to unintended latch inference or ambiguous hardware mapping.
+
 
 <p align="center">
   <img width="645" height="82" alt="Zrzut ekranu 2025-12-14 o 14 14 48" src="https://github.com/user-attachments/assets/ffbd73d6-fc82-4089-9c38-4862430a7154" />
