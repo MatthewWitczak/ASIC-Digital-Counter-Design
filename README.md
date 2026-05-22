@@ -16,7 +16,7 @@ The project serves as a compact but complete example of an RTL-to-GDS flow for a
 | Counter width        | Parameterizable (default: 8 bits) |
 | Counting range       | 0 to 2^WIDTH − 1                   |
 | Clocking scheme      | Rising-edge triggered              |
-| Reset type           | Active-high synchronous reset      |
+| Reset type           | Active-high asynchronous reset      |
 | Physical design flow | OpenLane RTL-to-GDS                |
 | Final output         | GDSII layout                       |
 
@@ -50,15 +50,26 @@ The RTL is written to be fully synthesis-compatible and free of constructs that 
 
 # Functional Verification
 
-Functional verification is performed using a self-contained Verilog testbench that instantiates the counter and applies deterministic stimulus. The testbench generates a periodic clock signal and controls the reset input to validate correct initialization and state progression.
+Functional verification was performed using a simple Verilog testbench that instantiates the counter, generates a periodic clock signal, applies an active-high reset, and records the simulation waveform to a VCD file.
 
-The verification checks include confirmation of synchronous reset behavior, monotonic incrementing on each rising clock edge, and correct wrap-around behavior after reaching the maximum representable count value. Simulations are executed for a sufficient number of cycles to observe multiple rollover events.
+The testbench uses a 100 MHz simulation clock, generated with a 10 ns period. After reset deassertion, the counter is allowed to run for a limited simulation time, which is sufficient to observe reset behavior and basic incrementing operation.
 
-Waveform analysis using VCD output is employed to verify correct temporal relationships between clock, reset, and output signals, ensuring that state transitions occur exclusively on clock edges and that no spurious glitches are present.
+The current testbench is waveform-based and is intended as a basic functional sanity check rather than a complete self-checking verification environment. It does not yet include automated assertions, pass/fail checks, constrained stimulus, or exhaustive verification of rollover behavior from the maximum counter value back to zero.
+
+Waveform inspection is used to confirm that the counter leaves the reset state and increments on subsequent clock edges. A more complete verification setup would extend the simulation duration, add a reference model, and automatically check the expected counter value on every clock cycle.
 
 <p align="center">
   <img width="1800" height="1169" alt="Zrzut ekranu 2025-12-14 o 14 23 13" src="https://github.com/user-attachments/assets/a4f3e366-fab8-4bd3-8b18-4b4068b9dad9" />
 </p>
+
+
+# Clock Configuration
+
+The RTL testbench uses a 100 MHz clock for functional simulation, corresponding to a 10 ns clock period. The OpenLane physical implementation flow is constrained with a 20 ns clock period, corresponding to a 50 MHz target frequency.
+
+This means that the functional simulation clock and the physical design timing constraint are not identical in the current version of the project. The simulation demonstrates basic RTL functionality, while the OpenLane constraint defines the target timing requirement used during synthesis, placement, routing, and static timing analysis.
+
+For consistency, a future revision of the project should align the testbench clock period and the OpenLane clock constraint, or explicitly document the reason for using different values.
 
 
 # Logic Synthesis
@@ -136,8 +147,9 @@ Layout Versus Schematic (LVS) verification confirms logical equivalence between 
   <img width="338" height="76" alt="Zrzut ekranu 2025-12-14 o 14 49 36" src="https://github.com/user-attachments/assets/4dd5fade-e5db-4dad-aeab-cf080069e770" />
 </p>
 
+
 # Conclusions
 
-This project demonstrates a complete and disciplined ASIC design flow for a synchronous digital counter, spanning RTL design, functional verification, synthesis, timing analysis, and physical implementation through to final GDS generation. Despite its functional simplicity, the design illustrates the essential steps and constraints involved in modern digital IC development.
+This project demonstrates a compact RTL-to-GDS ASIC flow for a simple parameterizable digital counter. The design covers RTL development, basic functional simulation, logic synthesis, timing analysis, physical implementation, and final GDS generation using OpenLane.
 
-The resulting implementation provides a robust and reusable digital building block and serves as a concise portfolio example of practical experience with RTL-to-GDS ASIC methodologies.
+Although the circuit itself is intentionally simple, the project illustrates the main stages of a standard-cell–based digital ASIC implementation flow. The current verification setup confirms basic counter operation through waveform inspection, while more advanced self-checking verification and exhaustive rollover testing are left as future improvements.
