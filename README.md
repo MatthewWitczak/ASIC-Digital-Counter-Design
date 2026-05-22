@@ -30,7 +30,7 @@ In ASIC implementations, the RTL description is mapped onto a predefined standar
 
 # Design Architecture
 
-The counter is implemented as a clocked sequential circuit composed of a register bank and combinational next-state logic. The counter state is updated on the rising edge of the clock, while an active-high asynchronous reset is used to force the register bank into a known initial state independently of the clock.
+The counter is implemented as a clocked sequential circuit composed of a register bank and simple combinational next-state logic. The counter state is updated on the rising edge of the clock, while an active-high asynchronous reset is used to force the register bank into a known initial state independently of the clock.
 
 The register bank stores the current counter value, while the combinational logic computes the next value by incrementing the current state by one. The counter width is defined as a parameter, allowing the same architecture to be synthesized for different bit widths without modifying the RTL structure. After reset deassertion, the counter resumes normal synchronous operation and increments on each rising clock edge.
 
