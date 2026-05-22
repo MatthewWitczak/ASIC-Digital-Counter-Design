@@ -1,6 +1,6 @@
 # Introduction
 
-The goal of this project is the design, verification, and physical implementation of a parameterizable synchronous digital counter realized as an ASIC. The work covers the complete digital integrated circuit design flow, starting from an RTL description and ending with a manufacturable GDSII layout generated using the OpenLane ASIC flow.
+The goal of this project is the design, verification, and physical implementation of a parameterizable synchronous digital counter realized as an ASIC. The work covers the complete digital integrated circuit design flow, starting from an RTL description and ending with a GDSII layout generated using the OpenLane ASIC flow.
 
 The project scope includes specification definition, synthesizable RTL development in Verilog, functional verification at the register-transfer level, logic synthesis, static timing analysis, and full physical design. The design is implemented using a standard-cell–based CMOS methodology and verified using industry-standard digital design and physical verification techniques (DRC/LVS).
 
@@ -107,7 +107,7 @@ The design is implemented as a standard-cell–based layout compliant with the s
 
 The final result of the physical design flow is a GDSII layout representing the complete physical realization of the counter. The layout includes placed standard cells, routed signal interconnects, clock distribution networks, and power rails distributed across multiple metal layers.
 
-The regularity of the counter architecture results in a compact layout with low routing congestion and predictable parasitic characteristics. The generated GDS file constitutes the final manufacturable representation of the design.
+The regularity of the counter architecture results in a compact layout with low routing congestion and predictable parasitic characteristics. The generated GDS file constitutes the final representation of the design.
 
 - General View
 <p align="center">  
